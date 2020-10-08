@@ -2,20 +2,17 @@
 
 @section('content')
 @php
-$school = \App\School::all()->count();
-$jobapp = \App\Appdata::all()->count();
-$pend = \App\Appdata::all()->where('status','pending')->count();
-$comp = \App\Appdata::all()->where('status','Complete')->count();
+
 @endphp
 <div class="content">
 	 <div class="row justify-content-center" >
         
         <div class="col-md-3 col-sm-6 col-xs-12">
-          <div class="info-box">
+          <div class="info-box"  style="border-radius:30px;">
             <span class="info-box-icon bg-aqua"><i class="fa fa-globe"></i></span>
 
             <div class="info-box-content">
-              <span class="info-box-text">Schools</span>
+              <span class="info-box-text">Companies</span>
               <span class="info-box-number">@if(!empty($school)) {{$school}} @else  0 @endif</span>
             </div>
             <!-- /.info-box-content -->
@@ -24,7 +21,7 @@ $comp = \App\Appdata::all()->where('status','Complete')->count();
         </div>
         <!-- /.col -->
         <div class="col-md-3 col-sm-6 col-xs-12">
-          <div class="info-box">
+          <div class="info-box"  style="border-radius:30px;">
             <span class="info-box-icon bg-red"><i class="fa fa-users"></i></span>
 
             <div class="info-box-content">
