@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-
+use App\Notifications\TwoFactorCode;
+use Illuminate\Http\Request;
 class LoginController extends Controller
 {
     /*
@@ -21,6 +22,11 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
+protected function authenticated(Request $request, $user)
+{
+    $user->generateTwoFactorCode();
+    $user->notify(new TwoFactorCode());
+}
     /**
      * Where to redirect users after login.
      *

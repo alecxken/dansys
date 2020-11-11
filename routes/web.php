@@ -17,7 +17,7 @@ Route::get('/', function () {
 });
 Route::get('/jobs-apps','SchoolController@applynow');
 
-Route::get('/view-apps','SchoolController@applicants');
+Route::get('/new-incident','IncidentController@new');
 
 Route::get('/view-adminapps','SchoolController@myapplicants');
 
@@ -25,6 +25,9 @@ Route::post('/proceed-job','SchoolController@continue');
 
 Route::post('/save-final','SchoolController@savefinal');
 
+Route::get('verify/page', 'TwoFactorController@resend')->name('verify.index');
+Route::get('verify/resend', 'TwoFactorController@resend')->name('verify.resend');
+Route::resource('verify', 'TwoFactorController')->only(['index', 'store']);
 
 
 Route::get('/create-school','SchoolController@createskul');
@@ -40,12 +43,18 @@ Route::get('/deletechecklist/{id}','SchoolController@deletechecklist');
 
 
 
-
 Auth::routes();
+Route::group([
+   
+    'middleware' => ['auth', 'twofactor']
+], function () {
 
 //Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/home', 'AdminController@index')->name('Dashboard');
+
 Route::get('/dashboard', 'AdminController@index')->name('Dashboard');
+
+});
 //permissions and Roles
 Route::resource('admin', 'UserController');
 Route::resource('roles', 'RoleController');

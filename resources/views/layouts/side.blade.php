@@ -33,7 +33,7 @@
           <!-- Optionally, you can add icons to the links -->
           <li  class="{{ (request()->is('dashboard')) ? 'active' : '' }}"><a href="{{url('dashboard')}}"><i class="fa fa-link"></i> <span>Dashboard</span></a></li>
           
-           <li><a href="{{url('')}}"><i class="fa fa-link"></i> <span>New Incident</span></a></li>
+           <li><a href="{{url('new-incident')}}"><i class="fa fa-link"></i> <span>New Incident</span></a></li>
            <li><a href="{{url('')}}"><i class="fa fa-link"></i> <span>My Incidents</span></a></li>
            @role('Reports')
            
