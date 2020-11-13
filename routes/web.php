@@ -44,17 +44,13 @@ Route::get('/deletechecklist/{id}','SchoolController@deletechecklist');
 
 
 Auth::routes();
-Route::group([
-   
-    'middleware' => ['auth', 'twofactor']
-], function () {
+
 
 //Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/home', 'AdminController@index')->name('Dashboard');
 
 Route::get('/dashboard', 'AdminController@index')->name('Dashboard');
 
-});
 //permissions and Roles
 Route::resource('admin', 'UserController');
 Route::resource('roles', 'RoleController');

@@ -22,11 +22,7 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
-protected function authenticated(Request $request, $user)
-{
-    $user->generateTwoFactorCode();
-    $user->notify(new TwoFactorCode());
-}
+// 
     /**
      * Where to redirect users after login.
      *
