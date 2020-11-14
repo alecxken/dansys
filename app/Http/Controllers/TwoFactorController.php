@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-
+use App\User;
+use App\Notifications\TwoFactorCode;
  class TwoFactorController extends Controller
 {
     public function index() 
@@ -23,8 +23,11 @@ use Illuminate\Http\Request;
         if($request->input('two_factor_code') == $user->two_factor_code)
         {
             $user->resetTwoFactorCode();
+             $data = User::findorfail($user->id);
+             $data->email_verified_at = \Carbon\Carbon::now();
+        $data->save();
 
-            return redirect()->route('admin.home');
+            return redirect('home');
         }
 
         return redirect()->back()

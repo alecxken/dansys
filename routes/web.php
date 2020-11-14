@@ -15,6 +15,11 @@
 Route::get('/', function () {
     return redirect('home');
 });
+
+Route::get('/jobs-index','HomeController@indexs');
+
+Route::get('/job-resend','HomeController@resend');
+
 Route::get('/jobs-apps','SchoolController@applynow');
 
 Route::get('/new-incident','IncidentController@new');
@@ -41,13 +46,18 @@ Route::post('/store-course-checklist','SchoolController@storecoursechk');
 
 Route::get('/deletechecklist/{id}','SchoolController@deletechecklist');
 
+Route::group(['middleware' => ['twofactor']], function () {
+    //
 
+    Auth::routes();
 
-Auth::routes();
-
-
+});
 //Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/home', 'AdminController@index')->name('Dashboard');
+
+
+
+
 
 Route::get('/dashboard', 'AdminController@index')->name('Dashboard');
 

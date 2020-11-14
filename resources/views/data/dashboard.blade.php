@@ -2,9 +2,26 @@
 
 @section('content')
 @php
+$user = auth()->user();
+
+        if(auth()->check() && $user->two_factor_code)
+        {
+          $user = 'ok';
+        }
+
 
 @endphp
 <div class="content">
+
+    @if (empty($user->email_verified_at))
+        <div id="erros" class="alert alert-info alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <h4>My Status!</h4>
+
+        <p> Youll need to verify your email <a href="{{url('jobs-index')}}">Click To Verify</a></p>
+      </div>
+
+      @endif
 	 <div class="row justify-content-center" >
         
         <div class="col-md-3 col-sm-6 col-xs-12">
