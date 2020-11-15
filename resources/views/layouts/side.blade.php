@@ -47,8 +47,8 @@
                 </span>
             </a>
             <ul class="treeview-menu">
-             <li><a href="{{url('view-adminapps')}}"><i class="fa fa-link"></i> <span>View Applications</span></a></li>
-            <li><a href="{{url('create-school')}}"><i class="fa fa-link"></i> <span>Register Organizations</span></a></li>
+             <li><a href="{{url('create-responder')}}"><i class="fa fa-link"></i> <span>Incident Responders</span></a></li>
+            <li><a href="{{url('company-create')}}"><i class="fa fa-link"></i> <span>Register Organizations</span></a></li>
    
            
           

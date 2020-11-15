@@ -16,6 +16,23 @@ Route::get('/', function () {
     return redirect('home');
 });
 
+#create-company routes
+
+
+Route::get('/company-create','IncidentController@createcompany');
+
+Route::get('company-get/{id}','IncidentController@getcompany');
+
+Route::get('/company-drop/{id}','IncidentController@deletecompany');
+
+Route::post('/company-store','IncidentController@storecompany');
+
+Route::post('/company-update','IncidentController@updatecompany');
+
+
+#end creation of company
+
+
 Route::get('/jobs-index','HomeController@indexs');
 
 Route::get('/job-resend','HomeController@resend');
