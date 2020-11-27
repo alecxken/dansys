@@ -29,6 +29,10 @@ Route::post('/company-store','IncidentController@storecompany');
 
 Route::post('/company-update','IncidentController@updatecompany');
 
+Route::post('/incident-store','IncidentController@storeincident');
+
+Route::get('/my-incidents','IncidentController@myincident');
+
 
 #end creation of company
 

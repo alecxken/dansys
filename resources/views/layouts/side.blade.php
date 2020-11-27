@@ -34,12 +34,12 @@
           <li  class="{{ (request()->is('dashboard')) ? 'active' : '' }}"><a href="{{url('dashboard')}}"><i class="fa fa-link"></i> <span>Dashboard</span></a></li>
           
            <li><a href="{{url('new-incident')}}"><i class="fa fa-link"></i> <span>New Incident</span></a></li>
-           <li><a href="{{url('')}}"><i class="fa fa-link"></i> <span>My Incidents</span></a></li>
+           <li><a href="{{url('my-incidents')}}"><i class="fa fa-link"></i> <span>My Incidents</span></a></li>
            @role('Reports')
            
 
            @endrole
-      
+        @role('Admin')
           <li class="treeview {{ (request()->is('job')) ? 'active' : '' }} ">
             <a href="#"><i class="fa fa-cog"></i> <span> Setting Sections</span>
               <span class="pull-right-container">
@@ -49,11 +49,14 @@
             <ul class="treeview-menu">
              <li><a href="{{url('create-responder')}}"><i class="fa fa-link"></i> <span>Incident Responders</span></a></li>
             <li><a href="{{url('company-create')}}"><i class="fa fa-link"></i> <span>Register Organizations</span></a></li>
+
+             <li><a href="{{url('admin')}}"><i class="fa fa-link"></i> <span>User Management</span></a></li>
    
            
           
             </ul>
           </li>
+          @endrole
      
 
         </ul>

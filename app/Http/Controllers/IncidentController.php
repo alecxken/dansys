@@ -4,14 +4,25 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Company;
+use App\Incident;
+use Auth;
 class IncidentController extends Controller
 {
     //
 
     public function new()
 	{
-	
-		return view('new');
+		$data = Company::all();
+		$incidents = Incident::all();
+		return view('new',compact('data','incidents'));
+	}
+
+	  public function myincident()
+	{
+		///$data = Company::all();
+		$data = Incident::all();
+		//return $data;
+		return view('mydata',compact('data'));
 	}
 #Create a compnay
 	public function createcompany()
@@ -19,6 +30,8 @@ class IncidentController extends Controller
 		$data = Company::all();
 		return view('newcompany',compact('data'));
 	}
+
+	
 
 #get a compnay
 	public function getcompany($id)
@@ -35,6 +48,23 @@ class IncidentController extends Controller
 		return back()->with('danger','deleted successfully');
 	
 	}
+
+	#Store Company
+	public function storeincident(Request $request)
+	{
+
+	   $data = new Incident();
+		$data->company_name = $request->input('company');
+		$data->user_id =Auth::id();
+		$data->sos_message = $request->input('incident');
+		$data->sos_location = $request->input('location');
+		$data->sos_status = 'pending';
+       $data->save();
+
+       return back()->with('status','Registered');
+	}
+
+#update Company
 #Store Company
 	public function storecompany(Request $request)
 	{

@@ -12,25 +12,33 @@
                 <h6 class="box-title ">Incident Registration</h6>
             </div> 
            <div class="box-body">
-              {!! Form::open(['method'=> 'post','url' => '#' ,'files' => true]) !!}
+              {!! Form::open(['method'=> 'post','url' => 'incident-store' ,'files' => true]) !!}
            
                  <div class="form-group col-md-4 ">
                     {!! Form::label('C_Name', 'Incident', ['class' => 'col-form-label '])!!}
                     {!!Form::text('token',rand(),['class' => 'form-control' ,'readonly' ])!!}
                 </div>
                 
-                 <div class="form-group col-md-4 ">
-                    {!! Form::label('C_Name', 'Incident Date:', ['class' => 'col-form-label '])!!}
-                    {!!Form::date('date',Null,['class' => 'form-control'])!!}
-                </div> 
+               
                  <div class="form-group col-md-4 ">
                     {!! Form::label('C_Name', 'Location:', ['class' => 'col-form-label '])!!}
                     {!!Form::text('location',Null,['class' => 'form-control','required' ])!!}
                 </div>  
+                  <div class="form-group col-md-4 ">
+                    {!! Form::label('C_Name', 'Company:', ['class' => 'col-form-label '])!!}
+       <select class="form-control" name="company">
+         <option disabled="">Select Company</option>
+         @if(!empty($data))
+          @foreach($data as $camp)
+            <option>{{$camp->company_name}}</option>
+          @endforeach
+         @endif
+       </select>
+                </div>  
              
                  <div class="form-group col-md-12 ">
                     {!! Form::label('C_Name', 'Incident Description:', ['class' => 'col-form-label '])!!}
-                    {!!Form::textarea('responsibility',Null,['class' => 'form-control','rows'=>'1' ])!!}
+                    {!!Form::textarea('incident',Null,['class' => 'form-control','rows'=>'1' ])!!}
                 </div>  
                 
               
@@ -50,7 +58,7 @@
    <div class="col-md-12">  
        <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Jobs Created</h3>
+              <h3 class="box-title">Incidents Created</h3>
             </div>
          <div class="box-body table-responsive">
           <table id="example1" class="table table-bordered table-striped">
@@ -64,14 +72,14 @@
                                                            
             </tr>
           </thead>
-           <tbody> @if(!empty($data))
-           @foreach ($data as $user)
+           <tbody> @if(!empty($incident))
+           @foreach ($incident as $user)
               <tr>
-                <td>{{$user->token}}</td>
-                <td>{{$user->title}}</td>            
-                <td>{{$user->deadline}}</td>
-                <td>{{$user->file}}</td>
-                <td><a href="{{url('deletejob/'.$user->token)}}" class="btn btn-danger">Drop</a></td>
+                <td>{{$user->id}}</td>
+                <td>{{$user->company_name}}</td>            
+                <td>{{$user->company_address}}</td>
+                <td>{{$user->company_phone}}</td>
+                <td><a href="{{url('dropincident/'.$user->token)}}" class="btn btn-danger">Drop</a></td>
             
               
               </tr>
