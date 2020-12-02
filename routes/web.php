@@ -34,6 +34,24 @@ Route::post('/incident-store','IncidentController@storeincident');
 Route::get('/my-incidents','IncidentController@myincident');
 
 
+
+Route::get('/soscompany-create','IncidentController@createsoscompany');
+
+Route::get('soscompany-get/{id}','IncidentController@getsoscompany');
+
+Route::get('/soscompany-drop/{id}','IncidentController@deletesoscompany');
+
+Route::post('/soscompany-store','IncidentController@storesoscompany');
+
+Route::post('/soscompany-update','IncidentController@updatesoscompany');
+
+Route::post('/rescompany-store','IncidentController@storerespondercompany');
+
+
+
+
+
+
 #end creation of company
 
 

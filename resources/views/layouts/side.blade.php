@@ -49,6 +49,8 @@
             <ul class="treeview-menu">
              <li><a href="{{url('create-responder')}}"><i class="fa fa-link"></i> <span>Incident Responders</span></a></li>
             <li><a href="{{url('company-create')}}"><i class="fa fa-link"></i> <span>Register Organizations</span></a></li>
+            <li>
+              <a href="{{url('soscompany-create')}}"><i class="fa fa-link"></i> <span>Emergency Resp Orgs</span></a></li>
 
              <li><a href="{{url('admin')}}"><i class="fa fa-link"></i> <span>User Management</span></a></li>
    

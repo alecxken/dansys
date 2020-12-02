@@ -21,11 +21,18 @@
                 
                
                  <div class="form-group col-md-4 ">
-                    {!! Form::label('C_Name', 'Location:', ['class' => 'col-form-label '])!!}
-                    {!!Form::text('location',Null,['class' => 'form-control','required' ])!!}
+                    {!! Form::label('C_Name', 'Nearest Sos Location:', ['class' => 'col-form-label '])!!}
+                    <select class="form-control" name="company">
+         <option disabled="">Select Option</option>
+         @if(!empty($datas))
+          @foreach($datas as $key => $camp)
+            <option>{{$key}}</option>
+          @endforeach
+         @endif
+       </select>
                 </div>  
                   <div class="form-group col-md-4 ">
-                    {!! Form::label('C_Name', 'Company:', ['class' => 'col-form-label '])!!}
+                    {!! Form::label('C_Name', 'Victims Company:', ['class' => 'col-form-label '])!!}
        <select class="form-control" name="company">
          <option disabled="">Select Company</option>
          @if(!empty($data))
@@ -38,7 +45,7 @@
              
                  <div class="form-group col-md-12 ">
                     {!! Form::label('C_Name', 'Incident Description:', ['class' => 'col-form-label '])!!}
-                    {!!Form::textarea('incident',Null,['class' => 'form-control','rows'=>'1' ])!!}
+                    {!!Form::textarea('incident',Null,['class' => 'form-control','rows'=>'2' ])!!}
                 </div>  
                 
               
