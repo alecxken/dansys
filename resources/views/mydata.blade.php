@@ -26,6 +26,7 @@
           </thead>
            <tbody> @if(!empty($data))
            @foreach ($data as $user)
+           @if(\App\User::all()->where('id',$user->user_id)->first()->id == Auth::id())
               <tr>
                 <td>{{$user->id}}</td>
                 <td>{{\App\User::all()->where('id',$user->user_id)->first()->name}}</td> 
@@ -36,6 +37,7 @@
             
               
               </tr>
+            @endif
           @endforeach
           @endif
           </tbody>
