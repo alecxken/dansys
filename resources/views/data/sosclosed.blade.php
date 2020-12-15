@@ -15,7 +15,7 @@
           <table id="example1" class="table table-bordered table-striped">
           <thead>
              <tr class="box-success">  
-               <th>Date</th>
+               <th>Reference</th>
                <th>Userid</th>
                <th>Message</th>
                <th>Location</th>
@@ -26,21 +26,13 @@
           </thead>
            <tbody> @if(!empty($data))
            @foreach ($data as $user)
-            @if($user->sos_status !== 'Actioned')
+          
               <tr>
-                <td>{{$user->created_at}}</td>
+                <td>{{$user->id}}</td>
                 <td>{{\App\User::all()->where('id',$user->user_id)->first()->name}}</td> 
                 <td>{{$user->sos_message}}</td>            
                 <td>{{$user->sos_location}}</td>
-                <td>
-                  @if($user->sos_status =='In Progress')
-                      <label class="label label-info">{{$user->sos_status}}</label>
-                  @elseif($user->sos_status =='Actioned')
-                      <label class="label label-success">{{$user->sos_status}}</label>
-                  @else
-                      <label class="label label-danger">{{$user->sos_status}}</label>
-                  @endif
-                  </td>
+                <td>{{$user->sos_status}}</td>
                 <td>
                  
  <button class="btn btn-sm btn-success  open-modal" value="{{$user->id}}">Action</button>
@@ -48,7 +40,7 @@
             
               
               </tr>
-              @endif
+  
           @endforeach
           @endif
           </tbody>

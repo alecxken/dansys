@@ -21,6 +21,8 @@ Route::get('/', function () {
 
 Route::get('/reported-incident','IncidentController@sosresponders');
 
+Route::get('/reported-incident-closed','IncidentController@sosrespondersapi');
+
 Route::get('/get-incidents/{id}','IncidentController@getactionincident');
 
 Route::post('/store-incident-comments','IncidentController@actionincident');

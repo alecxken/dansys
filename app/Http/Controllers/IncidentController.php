@@ -60,6 +60,18 @@ class IncidentController extends Controller
 
 		return view('data.soslist',compact('data'));
 	}
+
+		public function sosrespondersapi()
+	{
+		///$data = Company::all();
+		
+		$data = Incident::all()->where('sos_company',\Auth::user()->name);
+
+
+		//return $data;
+
+		return view('data.sosclosed',compact('data'));
+	}
 #Create a compnay
 	public function createcompany()
 	{
@@ -121,10 +133,11 @@ class IncidentController extends Controller
 	{
 
 		$escalations = Incident::all()->where('id',$request->input('incident_id'))->first();
-		// return $escalations;
+		
+	//	return $request;
 
 	   $data = Incident::findorfail($escalations->id);
-	   $data->sos_status = $request->input('status');		
+	   $data->sos_status = $request->input('incident_status');		
        $data->save();
 
        $comments = new ActionComments();
