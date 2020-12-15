@@ -32,11 +32,14 @@
           <li class="header">HEADER</li>
           <!-- Optionally, you can add icons to the links -->
           <li  class="{{ (request()->is('dashboard')) ? 'active' : '' }}"><a href="{{url('dashboard')}}"><i class="fa fa-link"></i> <span>Dashboard</span></a></li>
-          
+           @role('Responder')
+       <li><a href="{{url('reported-incident')}}"><i class="fa fa-link"></i> <span>Reported Incidents</span></a></li>
+       <li><a href="{{url('my-incidents')}}"><i class="fa fa-link"></i> <span>Actioned Incidents</span></a></li>
+       @else
            <li><a href="{{url('new-incident')}}"><i class="fa fa-link"></i> <span>New Incident</span></a></li>
            <li><a href="{{url('my-incidents')}}"><i class="fa fa-link"></i> <span>My Incidents</span></a></li>
-           @role('Reports')
-           
+          
+
 
            @endrole
         @role('Admin')

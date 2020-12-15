@@ -19,6 +19,17 @@ Route::get('/', function () {
 #create-company routes
 
 
+Route::get('/reported-incident','IncidentController@sosresponders');
+
+Route::get('/get-incidents/{id}','IncidentController@getactionincident');
+
+Route::post('/store-incident-comments','IncidentController@actionincident');
+
+
+
+
+Route::get('/sos-responders','IncidentController@sosresponders');
+
 Route::get('/company-create','IncidentController@createcompany');
 
 Route::get('company-get/{id}','IncidentController@getcompany');

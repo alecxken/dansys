@@ -32,7 +32,9 @@
                 <td>{{$user->sos_message}}</td>            
                 <td>{{$user->sos_location}}</td>
                 <td>{{$user->sos_status}}</td>
-                <td><a href="{{url('dropincident/'.$user->token)}}" class="btn btn-danger">Drop</a></td>
+                <td>
+ <button class="btn btn-sm btn-success  open-modal" value="{{$user->id}}">Action</button>
+              </td>
             
               
               </tr>
@@ -49,23 +51,24 @@
      </div>
    </div>
    
- <script >
+@include('data.soslistmodal')
+  <script type="text/javascript">      
+       $(document).ready(function(){
+          var url = "get-incidents";
+            //display modal form for task editing
+            $('.open-modal').click(function(){
+                var task_id = $(this).val();
 
-
-  $(function () {
-    //Initialize Select2 Elements
-    $('.select2').select2()
-
-    //Initialize Select2 Elements
-    $('.select2bs4').select2({
-      theme: 'bootstrap4'
-    })
-
- $('.textarea').summernote()
-   
-  })
-
- 
-</script>
+                $.get(url + '/' + task_id, function (data) {
+                    //success data
+                    console.log(data);
+                    $('#id').val(data.id);
+                    $('#message').val(data.sos_message);
+                    $('#btn-save').val("update");
+                    $('#myModal').modal('show');
+                }) 
+            });
+          });
+   </script>
 
 @endsection

@@ -7,7 +7,11 @@ use App\Company;
 use App\Incident;
 use App\Escalation;
 use App\SosCompany;
+use App\ActionComments;
 use Auth;
+USE App\User;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 class IncidentController extends Controller
 {
     //
@@ -20,7 +24,7 @@ class IncidentController extends Controller
 	{
 		$data = Company::all();
 		$incidents = Incident::all();
-			$datas =Escalation::all()->groupBy('sos_location');
+			$datas =Escalation::all();
 		
 		return view('new',compact('data','incidents','datas'));
 	}
@@ -32,6 +36,29 @@ class IncidentController extends Controller
 		//return $data;
 
 		return view('mydata',compact('data'));
+	}
+
+
+	  public function sentincidents()
+	{
+		///$data = Company::all();
+
+		$data = Incident::all()->where('sos_company','');
+		//return $data;
+
+		return view('mydata',compact('data'));
+	}
+
+	public function sosresponders()
+	{
+		///$data = Company::all();
+		
+		$data = Incident::all()->where('sos_company',\Auth::user()->name);
+
+
+		//return $data;
+
+		return view('data.soslist',compact('data'));
 	}
 #Create a compnay
 	public function createcompany()
@@ -63,13 +90,53 @@ class IncidentController extends Controller
 	public function storeincident(Request $request)
 	{
 
+		$escalations = Escalation::all()->where('sos_name',$request->input('sos_company'))->first();
+		// return $escalations;
+
 	   $data = new Incident();
+	   $data->sos_company= $escalations->sos_company;
+	   $data->sos_name= $request->input('sos_company');
 		$data->company_name = $request->input('company');
 		$data->user_id =Auth::id();
 		$data->sos_message = $request->input('incident');
-		$data->sos_location = $request->input('location');
+		$data->sos_location = $escalations->sos_location;
 		$data->sos_status = 'pending';
+
+		
        $data->save();
+
+       return back()->with('status','Registered');
+	}
+
+	public function getactionincident($id)
+	{
+		$data = Incident::all()->where('id',$id)->first();
+
+		return $data;
+
+	}
+
+	#Store Company
+	public function actionincident(Request $request)
+	{
+
+		$escalations = Incident::all()->where('id',$request->input('incident_id'))->first();
+		// return $escalations;
+
+	   $data = Incident::findorfail($escalations->id);
+	   $data->sos_status = $request->input('status');		
+       $data->save();
+
+       $comments = new ActionComments();
+	   $comments->incident_id = $request->input('incident_id');
+	   $comments->incident_status = $request->input('incident_status');
+	   $comments->comments = $request->input('comments');
+	   $comments->date = \Carbon\Carbon::today();
+	   $comments->actioned_by = \Auth::id();
+	   $comments->save();
+
+
+
 
        return back()->with('status','Registered');
 	}
@@ -142,7 +209,30 @@ class IncidentController extends Controller
        $data->location = $request->input('location');
        $data->phone = $request->input('phone');
        $data->status = 'Active';
-       $data->save();
+        $data->save();
+
+       $user = User::all()->where('email',$request->input('email'))->first();
+
+       $pass = 'P@ssw0rd';
+       if (!empty($user)) 
+       {
+       	$det = User::findorfail($user->id);
+       	$det->name = $request->input('name');
+        $det->email = $request->input('email');
+       
+        $det->save();
+       }
+       else
+       {
+       	$det = new User();
+       	$det->name = $request->input('name');
+        $det->email = $request->input('email');
+        $det->password = \Hash::make($pass);
+        $det->save();
+       }
+
+         $role_r = Role::where('name', '=', 'Responder')->firstOrFail();
+            $det->assignRole($role_r); 
 
        return back()->with('status','Registered');
 	}
@@ -167,6 +257,7 @@ class IncidentController extends Controller
 	   $data = new Escalation();
 	   $n = strtoupper($request->input('sos_company').'-'.$request->input('sos_name'));
        $data->sos_name = $n;
+         $data->sos_company = $request->input('sos_company');
        $data->sos_location = $request->input('sos_location');
        $data->sos_phone = $request->input('sos_phone');
         $data->save();

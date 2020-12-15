@@ -22,11 +22,11 @@
                
                  <div class="form-group col-md-4 ">
                     {!! Form::label('C_Name', 'Nearest Sos Location:', ['class' => 'col-form-label '])!!}
-                    <select class="form-control" name="company">
+                    <select class="form-control" name="sos_company">
          <option disabled="">Select Option</option>
          @if(!empty($datas))
           @foreach($datas as $key => $camp)
-            <option>{{$key}}</option>
+            <option value="{{$camp->sos_name}}">{{$camp->sos_name}} - {{$camp->sos_location}}</option>
           @endforeach
          @endif
        </select>
