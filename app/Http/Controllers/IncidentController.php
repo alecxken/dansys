@@ -89,6 +89,15 @@ class IncidentController extends Controller
 		return $data;
 	}
 
+//
+	public function dropincident($id)
+	{
+		$data = Incident::findorfail($id);
+		$data->delete();
+
+		return back()->with('danger','Deleted');
+	}
+
 #get a compnay
 	public function deletecompany($id)
 	{

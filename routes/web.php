@@ -25,6 +25,8 @@ Route::get('/reported-incident-closed','IncidentController@sosrespondersapi');
 
 Route::get('/get-incidents/{id}','IncidentController@getactionincident');
 
+Route::get('/drop-incident/{id}','IncidentController@dropincident');
+
 Route::post('/store-incident-comments','IncidentController@actionincident');
 
 

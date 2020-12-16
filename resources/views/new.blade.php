@@ -22,8 +22,8 @@
                
                  <div class="form-group col-md-4 ">
                     {!! Form::label('C_Name', 'Nearest Sos Location:', ['class' => 'col-form-label '])!!}
-                    <select class="form-control" name="sos_company">
-         <option disabled="">Select Option</option>
+                    <select class="form-control" name="sos_company" required="">
+         <option value="" >Select Option</option>
          @if(!empty($datas))
           @foreach($datas as $key => $camp)
             <option value="{{$camp->sos_name}}">{{$camp->sos_name}} - {{$camp->sos_location}}</option>
@@ -33,8 +33,9 @@
                 </div>  
                   <div class="form-group col-md-4 ">
                     {!! Form::label('C_Name', 'Victims Company:', ['class' => 'col-form-label '])!!}
-       <select class="form-control" name="company">
-         <option disabled="">Select Company</option>
+       <select class="form-control" name="company" required="">
+         <option value="">Select Company</option>
+         <option>Not Listed</option>
          @if(!empty($data))
           @foreach($data as $camp)
             <option>{{$camp->company_name}}</option>

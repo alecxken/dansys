@@ -42,7 +42,7 @@
                       {!! Form::open([ 'method' => 'post', 'url' => ['user_edit/'. $user->id] ]) !!}
                       {!! Form::submit('Edit ', ['class' => 'btn btn-primary pull-left']) !!}
                       {!! Form::close() !!}
-                      {!! Form::open(['method' => 'DELETE', 'url' => ['user_destroy/'.$user->id] ]) !!}
+                      {!! Form::open(['method' => 'get', 'url' => ['user_destroy/'.$user->id] ]) !!}
                       {!! Form::submit('Delete', ['class' => 'btn btn-danger pull-left']) !!}
                       {!! Form::close() !!}
 
